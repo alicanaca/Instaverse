@@ -1,7 +1,10 @@
 
 const storyReducer = (state = [], action) => {
-    if(action.type === "FETCH_ALL_STORIES"){
-        return action.payload;
+    switch (action.type) {
+        case "FETCH_ALL_STORIES":
+            return action.payload;
+        default:
+            return state;
     }
 }
 
