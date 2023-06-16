@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 
 function StoryList() {
   const stories = useSelector((state) => state.stories)
-  console.log("stories", stories)
   
   return (
     <Row gutter={[48, 32]}>
