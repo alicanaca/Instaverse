@@ -16,8 +16,8 @@ const createStory = async (req, res) => {
         ...body
     })
     try {
-        await newStory.save()
-        res.status(201).json(newStory)
+        await newStory.save();
+        res.status(201).json(newStory);
     } catch (error) {
         res.status(409).json({message: error.message})
     }
