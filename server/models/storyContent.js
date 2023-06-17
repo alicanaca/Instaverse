@@ -10,7 +10,8 @@ const storySchema = mongoose.Schema({
         required: true
     },
     userId: {
-        type: String
+        type: String,
+        required: true
     },
     image: {
         type: String,

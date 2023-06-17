@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { Card, Form, Input, Typography, Button } from "antd"
 import styles from './styles'
@@ -12,9 +13,12 @@ function StoryForm({ selectedId, setSelectedId }) {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
+  const user = JSON.parse(localStorage.getItem("Profile"))
+  const username = user?.result?.username
+
   const onSubmit = (formValues) => {
-    selectedId ? dispatch(updateStory(selectedId, formValues)) :
-      dispatch(createStory(formValues));
+    selectedId ? dispatch(updateStory(selectedId, {...formValues, username})) :
+      dispatch(createStory({...formValues, username}));
     reset()
   }
 
@@ -27,6 +31,20 @@ function StoryForm({ selectedId, setSelectedId }) {
   const reset = () => {
     form.resetFields()
     setSelectedId(null)
+  }
+
+  if(!user){
+    return(
+      <Card style={styles.formCard}>
+        <Title level={4}>
+          <span style={styles.formTitle}>
+            Welcome to Instaverse
+          </span> <br />
+          Please <Link to="/authform">login</Link> or 
+          <Link to="/authform"> register</Link> to share your moments!
+        </Title>
+      </Card>
+    )
   }
 
   return (
@@ -43,9 +61,6 @@ function StoryForm({ selectedId, setSelectedId }) {
         size='middle'
         onFinish={onSubmit}
       >
-        <Form.Item name="username" label="Username" rules={[{ required: true }]} >
-          <Input allowClear />
-        </Form.Item>
         <Form.Item name="caption" label="Caption" rules={[{ required: true }]} >
           <Input.TextArea allowClear autoSize={{ minRows: 2, maxRows: 6 }} />
         </Form.Item>
