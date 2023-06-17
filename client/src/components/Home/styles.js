@@ -1,9 +1,13 @@
 const styles = {
+    layout: {
+      minHeight: "100vh",
+      background: 'antiquewhite'
+    },
     sider:{
-        background: '#f0f2f5'
+        background: 'antiquewhite'
     },
     content:{
-        margin:'2rem'
+        margin:'2rem',
     }
 }
 

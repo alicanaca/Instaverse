@@ -17,7 +17,7 @@ const Home = () => {
     }, [dispatch])
 
     return(
-        <Layout>
+        <Layout style={styles.layout}>
             <Sider style={styles.sider} width={400}>
                 <StoryForm selectedId={selectedId} setSelectedId={setSelectedId} />
             </Sider>
