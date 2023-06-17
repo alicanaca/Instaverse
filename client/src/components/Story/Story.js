@@ -21,7 +21,7 @@ function Story({ story, setSelectedId }) {
         <div style={styles.actions}>
           <Tooltip onClick={() => { dispatch(likeStory(story._id))}} placement='top' title='Like' color='magenta'>
           <HeartTwoTone twoToneColor="magenta" />
-          &nbsp; {story.likes} &nbsp;
+          &nbsp; {story.likes.length - 1} &nbsp;
           </Tooltip>
         </div>,
         <Tooltip placement='top' title='Edit'>
