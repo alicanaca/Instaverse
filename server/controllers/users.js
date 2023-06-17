@@ -40,4 +40,13 @@ const signup = async (req, res) => {
     }
 }
 
-export { login, signup }
+const getuser = async (req, res) => {
+    try {
+        const user = await User.find();
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+export { login, signup, getuser }
