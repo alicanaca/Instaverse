@@ -1,7 +1,6 @@
 import * as api from '../api'
 import {
-    AUTHENTICATION,
-    LOGOUT
+    AUTHENTICATION
 } from '../constants/actionTypes'
 
 export const signup = (formValues, navigate) => async (dispatch) => {
