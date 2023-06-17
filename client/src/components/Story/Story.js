@@ -4,7 +4,7 @@ import { Card, Tooltip, Typography, Image } from "antd"
 import { EditOutlined, DeleteTwoTone, HeartTwoTone } from "@ant-design/icons"
 import styles from "./styles"
 import moment from 'moment'
-import { deleteStory } from '../../actions/stories'
+import { deleteStory, likeStory } from '../../actions/stories'
 
 const { Meta } = Card
 const { Link, Paragraph, Text } = Typography
@@ -19,7 +19,7 @@ function Story({ story, setSelectedId }) {
       cover={<Image src={story.image} />}
       actions={[
         <div style={styles.actions}>
-          <Tooltip onClick={() => {}} placement='top' title='Like' color='magenta'>
+          <Tooltip onClick={() => { dispatch(likeStory(story._id))}} placement='top' title='Like' color='magenta'>
           <HeartTwoTone twoToneColor="magenta" />
           &nbsp; {story.likes} &nbsp;
           </Tooltip>

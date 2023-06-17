@@ -48,4 +48,18 @@ const deleteStory = async (req, res) => {
     res.json({message: 'Deleted successfully'})
 }
 
-export {getStories, createStory, updateStory, deleteStory};
+const likeStory = async (req, res) => {
+    const { id } = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).send("This id is not valid")
+    }
+
+    const story = await Story.findById(id)
+
+    const likedStory = await Story.findByIdAndUpdate(id, { likes: story.likes + 1}, { new: true } )
+
+    res.json(likedStory)
+}
+
+export {getStories, createStory, updateStory, deleteStory, likeStory};

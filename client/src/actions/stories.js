@@ -3,7 +3,7 @@ import {
     FETCH_ALL_STORIES,
     CREATE_STORY,
     UPDATE_STORY,
-    DELETE_STORY
+    DELETE_STORY,
 } from "../constants/actionTypes";
 
 export const getStories = () => async (dispatch) => {
@@ -37,6 +37,15 @@ export const deleteStory = (id) => async (dispatch) => {
     try {
         await api.deleteStory(id);
         dispatch({ type: DELETE_STORY, payload: id });
+    } catch (error) {
+        console.log(error.message)
+    }
+};
+
+export const likeStory = (id) => async (dispatch) => {
+    try {
+        const { data } = await api.likeStory(id);
+        dispatch({ type: UPDATE_STORY, payload: data });
     } catch (error) {
         console.log(error.message)
     }
