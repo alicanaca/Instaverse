@@ -24,7 +24,7 @@ const createStory = async (req, res) => {
 }
 
 const updateStory = async (req, res) => {
-    const { id: _id } = req.params.id
+    const { id: _id } = req.params
     const story = req.body
 
     if(!mongoose.Types.ObjectId.isValid(_id)) {

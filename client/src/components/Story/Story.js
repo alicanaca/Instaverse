@@ -7,7 +7,7 @@ import moment from 'moment'
 const { Meta } = Card
 const { Link, Paragraph, Text } = Typography
 
-function Story({ story }) {
+function Story({ story, setSelectedId }) {
   const [expand, setExpand] = useState(true)
 
   return (
@@ -22,7 +22,9 @@ function Story({ story }) {
           </Tooltip>
         </div>,
         <Tooltip placement='top' title='Edit'>
-          <EditOutlined onClick={() => {}} />
+          <EditOutlined onClick={() => {
+            setSelectedId(story._id)
+          }} />
         </Tooltip>,
         <Tooltip placement='top' title='Delete' color='red'>
           <DeleteTwoTone onClick={() => {}} twoToneColor='red' />
