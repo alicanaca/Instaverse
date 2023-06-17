@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
 import styles from './styles'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Form, Input, Button, Card, Layout, Typography } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { login, signup } from '../../actions/authentication'
 
 const { Title } = Typography
 
 export default function AuthForm() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(false)
     const user = null;
     const [form] = Form.useForm();
 
-    const onSubmit = () => {
-
+    const onSubmit = (formValues) => {
+        if(isLogin) {
+            dispatch(login(formValues, navigate))
+        } else {
+            dispatch(signup(formValues, navigate))
+        }
     }
 
     const switchMode = () => {
@@ -81,7 +90,7 @@ export default function AuthForm() {
                         </Form.Item>
                     )}
                     <Form.Item style={styles.buttonRow}>
-                        <Button htmlType='submit' type='primary'>
+                        <Button htmlType='submit' typeof='primary'>
                             {isLogin ? "Login" : "Join" }
                         </Button>
                         <span style={{ margin: "0 20px 0 35px" }}> or </span>
