@@ -12,7 +12,6 @@ export default function AuthForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isLogin, setIsLogin] = useState(true)
-    const user = null;
     const [form] = Form.useForm();
 
     const onSubmit = (formValues) => {
