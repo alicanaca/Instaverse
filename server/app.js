@@ -3,16 +3,18 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import storyRoutes from './routes/stories.js'
+import dotenv from 'dotenv'
 
 const app = express();
+dotenv.config();
 
 app.use(bodyParser.json({limit: '32mb', extended: 'true'}));
 app.use(bodyParser.urlencoded({limit: '32mb', extended: 'true'}));
 app.use(cors());
 app.use("/stories", storyRoutes);
 
-const MONGO_URI = "mongodb+srv://alicanaca7:clusterPass@cluster0.xzavplq.mongodb.net/";
-const PORT = process.env.PORT || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.PORT;
 
 const connectDB = async () => {
     try {
