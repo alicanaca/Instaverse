@@ -25,6 +25,7 @@ export default function AppBar() {
                 logout()
             }
         }
+        setUser(JSON.parse(localStorage.getItem("Profile")));
     },[location])
 
     const logout = () => {
@@ -55,8 +56,9 @@ export default function AppBar() {
                     </Avatar>
                     <Title style={styles.title} level={4}>
                         {user?.result?.username}
+                        &nbsp;
                     </Title>
-                    <Button onClick={logout} htmlType='button'>
+                    <Button onClick={logout} htmlType='button' type="primary" style={{backgroundColor: 'bisque', color: 'red'}}>
                         Logout
                     </Button>
                 </div>
