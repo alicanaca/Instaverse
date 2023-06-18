@@ -1,6 +1,11 @@
 import User from '../models/userContent.js'
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const jwtsign = process.env.JWT_SIGN
 
 const login = async (req, res) => {
     const { email, password } = req.body
@@ -14,7 +19,7 @@ const login = async (req, res) => {
         if(!isPasswordValid){
             return res.status(404).json({message: "Password is incorrect"})
         }
-        const token = jwt.sign({email: isUser.email, id: isUser._id }, "1234", { expiresIn: "1h" })
+        const token = jwt.sign({email: isUser.email, id: isUser._id }, jwtsign, { expiresIn: "1h" })
         res.status(200).json({ result: isUser, token });
     } catch (error) {
         res.status(500).json({message: "Something went wrong"})
@@ -33,7 +38,7 @@ const signup = async (req, res) => {
         }
         const encryptedPass = await bcrypt.hash(password, 10)
         const result = await User.create({ username, email, password: encryptedPass })
-        const token = jwt.sign({email: result.email, id: result._id }, "1234", { expiresIn: "1h" })
+        const token = jwt.sign({email: result.email, id: result._id }, jwtsign, { expiresIn: "1h" })
         res.status(201).json({ result, token });
     } catch (error) {
         res.status(500).json({message: "Something went wrong"})
